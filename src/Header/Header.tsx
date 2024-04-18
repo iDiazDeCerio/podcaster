@@ -2,6 +2,7 @@ import React, { useContext, useTransition } from "react";
 import styled from "styled-components";
 import { color, size } from "../theme";
 import { NavigationContext } from "../Root";
+import { Loader } from "./Loader";
 
 export const Header: React.FC = () => {
   const navigation = useContext(NavigationContext)
@@ -16,7 +17,7 @@ export const Header: React.FC = () => {
   return (
     <HeaderWrapper>
       <PageTitle onClick={onNavigateToList}>Podcaster</PageTitle>
-      {navigation.isNavigating && <p>Loading...</p>}
+      {navigation.isNavigating && <Loader />}
     </HeaderWrapper>
   );
 };

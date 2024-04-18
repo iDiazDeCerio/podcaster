@@ -12,7 +12,7 @@ export const NavigationContext = createContext<{
 });
 
 export const Root: React.FC = () => {
-  const [isNavigating, setIsNavigating] = useState<boolean>();
+  const [isNavigating, setIsNavigating] = useState<boolean>(false);
 
   return (
     <NavigationContext.Provider value={{ isNavigating, setIsNavigating }}>
