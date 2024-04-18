@@ -1,8 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import { routes } from "./routes";
-import { GlobalStyles } from "./theme/GlobalStyles";
+import { routes } from "./front/routes";
+import { GlobalStyles } from "./front/theme/GlobalStyles";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 const router = createBrowserRouter(routes);
