@@ -1,23 +1,18 @@
 import React from "react";
-import { Outlet, RouteObject } from "react-router-dom";
-import { Header } from "./Header";
+import { RouteObject } from "react-router-dom";
 import { PodcastList } from "./PodcastList";
 import { PodcastDetail } from "./PodcastDetail";
 import { EpisodeDetail } from "./EpisodeDetail";
+import { Root } from "./Root";
 
 export const routes: RouteObject[] = [
   {
     path: "/",
-    element: (
-      <>
-        <Header />
-        <Outlet />
-      </>
-    ),
+    element: <Root />,
     children: [
       {
         path: "/",
-        element: <PodcastList />
+        element: <PodcastList />,
       },
       {
         path: "/podcast/:podcastId",
@@ -25,11 +20,10 @@ export const routes: RouteObject[] = [
         children: [
           {
             path: "/podcast/:podcastId/episode/:episodeId",
-            element: <EpisodeDetail />
+            element: <EpisodeDetail />,
           },
-
-        ]
+        ],
       },
-    ]
+    ],
   },
 ];
