@@ -45,8 +45,9 @@ export interface PodcastDTO {
   };
 }
 
-export interface Podcast {
+export interface PodcastListItem {
+  id: string;
   name: string;
   image: string;
-  
+  author: string;
 }
