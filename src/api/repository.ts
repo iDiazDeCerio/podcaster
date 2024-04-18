@@ -1,5 +1,6 @@
-import { PodcastDTO } from "./Podcast.types";
+import { PodcastDTO, PodcastListItem } from "./podcast.types";
 import { storageHelper } from "./cache";
+import { mapTop100Podcasts } from "./podcast.mappers";
 
 export const getTop100Podcasts = async () => {
   const top100StorageKey = "top100Podcasts";
@@ -15,9 +16,10 @@ export const getTop100Podcasts = async () => {
       })
       .then((data) => data.contents);
     
-    storageHelper.store(top100StorageKey, JSON.stringify(fetchedData));
-    return fetchedData;
+    const mappedData = mapTop100Podcasts(fetchedData)
+    storageHelper.store(top100StorageKey, JSON.stringify(mappedData));
+    return mappedData;
   } else {
-    return JSON.parse(storageHelper.load(top100StorageKey)) as PodcastDTO[];
+    return JSON.parse(storageHelper.load(top100StorageKey)) as PodcastListItem[];
   }
 };
