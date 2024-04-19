@@ -1,5 +1,5 @@
 import { PodcastListDto, PodcastListItem } from "./podcast.types";
-import { storageHelper } from "./cache";
+import { storageHelper } from "./storageHelper";
 import { mapTop100Podcasts } from "./podcast.mappers";
 
 export const getTop100Podcasts = async () => {
