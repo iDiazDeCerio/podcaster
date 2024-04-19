@@ -13,9 +13,9 @@ export const Loader: React.FC = () => (
       cy="50"
       fill="none"
       stroke="currentcolor"
-      stroke-width="12"
+      strokeWidth="12"
       r="44"
-      stroke-dasharray="200 80"
+      strokeDasharray="200 80"
     ></circle>
   </LoadIcon>
 );

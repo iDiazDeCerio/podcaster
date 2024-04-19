@@ -1,6 +1,7 @@
 const remScaleNumber = 16;
 
 interface SizeObject {
+  tiny: string,
   base: string;
   xs: string;
   s: string;
@@ -10,6 +11,7 @@ interface SizeObject {
 }
 
 const sizeNumber = {
+  tiny: 2,
   base: 4,
   xs: 8,
   s: 16,
@@ -27,6 +29,7 @@ export const size = (
     return sizeObject;
   },
   {
+    tiny: "",
     base: "",
     xs: "",
     s: "",

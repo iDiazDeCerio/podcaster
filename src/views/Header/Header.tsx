@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import styled from "styled-components";
 import { color, fontSize, size } from "../theme";
 import { NavigationContext } from "../Root";
-import { Loader } from "./Loader";
+import { Loader } from "../_components/Loader";
 import { routes } from "../routes";
 import { useNavigate } from "react-router-dom";
 
