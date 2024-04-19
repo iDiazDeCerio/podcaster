@@ -4,7 +4,6 @@ export const mapTop100Podcasts = (
   podcastList: PodcastListDto
 ): PodcastListItem[] => {
   return podcastList.feed.entry.map((item) => {
-    console.log(item["im:name"].label)
     return {
       id: item.id.attributes["im:id"],
       image: item["im:image"][1].label,
