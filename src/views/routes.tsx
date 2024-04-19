@@ -5,7 +5,14 @@ import { PodcastDetail } from "./PodcastDetail";
 import { EpisodeDetail } from "./EpisodeDetail";
 import { Root } from "./Root";
 
-export const routes: RouteObject[] = [
+export const routes = {
+  podcastList: "/",
+  podcastDetail: (podcastId: string) => `/podcast/${podcastId}`,
+  episodeDetail: (podcastId: string, episodeId: string) =>
+    `/podcast/${podcastId}/episode/${episodeId}`,
+};
+
+export const appRoutes: RouteObject[] = [
   {
     path: "/",
     element: <Root />,

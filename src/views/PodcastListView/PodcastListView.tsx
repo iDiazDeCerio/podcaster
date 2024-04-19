@@ -1,20 +1,31 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { PodcastListItem } from "../../api/podcast.types";
 import { getTop100Podcasts } from "../../api/repository";
 import { ListPodcast } from "./ListPodcast";
 import styled from "styled-components";
 import { size } from "../theme";
+import { routes } from "../routes";
+import { useNavigate } from "react-router-dom";
+import { NavigationContext } from "../Root";
 
 export const PodcastListView: React.FC = () => {
+  const navigate = useNavigate();
+  const navigationContext = useContext(NavigationContext);
   const [podcastList, setPodcastList] = useState<PodcastListItem[]>([]);
 
   useEffect(() => {
     const loadPodcasts = async () => {
       setPodcastList(await getTop100Podcasts());
+      navigationContext.setIsNavigating(false);
     };
 
     loadPodcasts();
-  }, []);
+  }, [navigationContext]);
+
+  const onPodcastClick = (podcastId: string) => {
+    navigationContext.setIsNavigating(true);
+    navigate(routes.podcastDetail(podcastId));
+  };
 
   return (
     <>
@@ -23,7 +34,11 @@ export const PodcastListView: React.FC = () => {
       </label>
       <PodcastListWrapper>
         {podcastList.map((podcast) => (
-          <ListPodcast key={podcast.id} podcast={podcast} />
+          <ListPodcast
+            key={podcast.id}
+            podcast={podcast}
+            onClick={onPodcastClick}
+          />
         ))}
       </PodcastListWrapper>
     </>

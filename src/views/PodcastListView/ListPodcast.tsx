@@ -5,11 +5,12 @@ import { color, fontSize, size } from "../theme";
 
 interface Props {
   podcast: PodcastListItem;
+  onClick: (podcastIdd: string) => void;
 }
 
-export const ListPodcast: React.FC<Props> = ({ podcast }) => {
+export const ListPodcast: React.FC<Props> = ({ podcast, onClick }) => {
   return (
-    <ListPodcastWrapper onClick={() => podcast.id}>
+    <ListPodcastWrapper onClick={() => onClick(podcast.id)}>
       <ListPodcastBlock>
         <ListPodcastImage src={podcast.image} />
         <ListPodcastTitle>{podcast.name}</ListPodcastTitle>
@@ -34,6 +35,11 @@ const ListPodcastBlock = styled.div`
   text-align: center;
 
   box-shadow: 0px 3px 10px -2px ${color.gray};
+
+  &:hover {
+    box-shadow: 0px 3px 10px -2px ${color.black};
+    cursor: pointer;
+  }
 `;
 
 const ListPodcastImage = styled.div<{ src: string }>`

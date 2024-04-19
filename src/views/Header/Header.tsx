@@ -1,31 +1,32 @@
-import React, { useContext, useTransition } from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
-import { color, size } from "../theme";
+import { color, fontSize, size } from "../theme";
 import { NavigationContext } from "../Root";
 import { Loader } from "./Loader";
+import { routes } from "../routes";
+import { useNavigate } from "react-router-dom";
 
 export const Header: React.FC = () => {
-  const navigation = useContext(NavigationContext)
-  const [isPending, startTransition] = useTransition()
+  const navigate = useNavigate()
+  const navigationContext = useContext(NavigationContext);
 
   const onNavigateToList = () => {
-    startTransition(() => {
-      navigation.setIsNavigating(isPending)
-    })
-  }
+    navigationContext.setIsNavigating(true);
+    navigate(routes.podcastList);
+  };
 
   return (
     <HeaderWrapper>
       <PageTitle onClick={onNavigateToList}>Podcaster</PageTitle>
-      {navigation.isNavigating && <Loader />}
+      {navigationContext.isNavigating && <Loader />}
     </HeaderWrapper>
   );
 };
 
 const HeaderWrapper = styled.div`
   display: flex;
-  justify-content: space-between; 
-
+  justify-content: space-between;
+  
   padding-top: ${size.s};
   padding-bottom: ${size.s};
   margin-bottom: ${size.s};
@@ -33,6 +34,7 @@ const HeaderWrapper = styled.div`
 `;
 
 const PageTitle = styled.h1`
+  font-size: ${fontSize.l};
   font-weight: bold;
   color: ${color.blue};
 

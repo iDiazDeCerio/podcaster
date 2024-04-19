@@ -26,6 +26,7 @@ const rotationAnimation = keyframes`
 `;
 
 const LoadIcon = styled.svg`
+  display: block;
   width: ${size.s};
   height: ${size.s};
 

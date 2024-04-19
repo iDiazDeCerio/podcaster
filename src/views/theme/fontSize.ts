@@ -4,7 +4,7 @@ const fontSizeNumbers = {
   xs: 12,
   s: 14,
   m: 16,
-  l: 24,
+  l: 20,
 }
 
 export const fontSize = {
