@@ -1,4 +1,4 @@
-export interface PodcastDTO {
+interface PodcastDTO {
   "im:name": { label: string };
   "im:image": {
     label: string;
@@ -45,9 +45,19 @@ export interface PodcastDTO {
   };
 }
 
+export interface PodcastListDto {
+  feed: {
+    author: {
+      name: { label: string };
+      uri: { label: string };
+    };
+    entry: PodcastDTO[];
+  };
+}
+
 export interface PodcastListItem {
   id: string;
-  title: string;
+  name: string;
   image: string;
   author: string;
 }

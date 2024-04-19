@@ -29,7 +29,7 @@ const HeaderWrapper = styled.div`
   padding-top: ${size.s};
   padding-bottom: ${size.s};
   margin-bottom: ${size.s};
-  border-bottom: 1px solid ${color.gray};
+  border-bottom: 1px solid ${color.lightGray};
 `;
 
 const PageTitle = styled.h1`

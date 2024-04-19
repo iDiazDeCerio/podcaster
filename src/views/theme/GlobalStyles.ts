@@ -1,4 +1,6 @@
 import { createGlobalStyle } from "styled-components";
+import { fontSize } from "./fontSize";
+import { color } from "./color";
 
 export const GlobalStyles = createGlobalStyle`
   /* http://meyerweb.com/eric/tools/css/reset/ 
@@ -52,5 +54,7 @@ export const GlobalStyles = createGlobalStyle`
 
   body {
     font-family: "Arial";
+    color: ${color.black};
+    font-size: ${fontSize.s};
   }
 `;

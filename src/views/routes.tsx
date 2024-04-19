@@ -1,6 +1,6 @@
 import React from "react";
 import { RouteObject } from "react-router-dom";
-import { PodcastList } from "./PodcastList";
+import { PodcastListView } from "./PodcastListView";
 import { PodcastDetail } from "./PodcastDetail";
 import { EpisodeDetail } from "./EpisodeDetail";
 import { Root } from "./Root";
@@ -12,7 +12,7 @@ export const routes: RouteObject[] = [
     children: [
       {
         path: "/",
-        element: <PodcastList />,
+        element: <PodcastListView />,
       },
       {
         path: "/podcast/:podcastId",
