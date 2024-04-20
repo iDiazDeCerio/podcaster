@@ -1,5 +1,5 @@
 import React from "react";
-import { PodcastListItem } from "../../api/podcast.types";
+import { PodcastListItem } from "../../api/podcast.models";
 import styled from "styled-components";
 import { color, fontSize, size } from "../theme";
 

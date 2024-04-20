@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState, useTransition } from "react";
-import { PodcastListItem } from "../../api/podcast.types";
+import { PodcastListItem } from "../../api/podcast.models";
 import { getTop100Podcasts } from "../../api/repository";
 import { ListPodcast } from "./ListPodcast";
 import styled from "styled-components";
@@ -45,7 +45,10 @@ export const PodcastListView: React.FC = () => {
 
   const onPodcastClick = (podcastId: string) => {
     navigationContext.setIsNavigating(true);
-    navigate(routes.podcastDetail(podcastId));
+    const selectedPodcast = podcastList.find(
+      (podcast) => podcast.id === podcastId
+    );
+    navigate(routes.podcastDetail(podcastId), { state: { selectedPodcast } });
   };
 
   return (

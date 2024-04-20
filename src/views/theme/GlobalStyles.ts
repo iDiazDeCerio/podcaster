@@ -1,5 +1,5 @@
 import { createGlobalStyle } from "styled-components";
-import { fontSize } from "./fontSize";
+import { fontSize, lineHeight } from "./font";
 import { color } from "./color";
 
 export const GlobalStyles = createGlobalStyle`
@@ -56,5 +56,12 @@ export const GlobalStyles = createGlobalStyle`
     font-family: "Arial";
     color: ${color.black};
     font-size: ${fontSize.s};
+    line-height: ${lineHeight.s};
+  }
+
+  hr {
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid ${color.lightGray};
   }
 `;
