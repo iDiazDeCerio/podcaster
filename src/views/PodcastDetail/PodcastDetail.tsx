@@ -8,6 +8,7 @@ import { NavigationContext } from "../Root";
 import { color, size } from "../theme";
 import { PodcastDetailSummary } from "./PodcastDetailSummary";
 import { Text } from "../_components/Text";
+import { EpisodeTable } from "./EpisodeTable";
 
 export const PodcastDetail: React.FC = () => {
   const navigationContext = useContext(NavigationContext);
@@ -36,42 +37,7 @@ export const PodcastDetail: React.FC = () => {
             Episodes: {podcastDetail.episodeCount}
           </Text>
         </EpisodeCount>
-        <EpisodeTableWrapper>
-          <table>
-            <thead>
-              <HeaderRow>
-                <Text as="th" align="left" bold fontSize="xs">
-                  Title
-                </Text>
-                <Text as="th" align="left" bold fontSize="xs">
-                  Date
-                </Text>
-                <Text as="th" align="left" bold fontSize="xs">
-                  Duration
-                </Text>
-              </HeaderRow>
-            </thead>
-            <tbody>
-              {podcastDetail.episodes.map((episode) => {
-                return (
-                  <TableRow key={episode.id}>
-                    <td>
-                      <Text fontSize="xs">{episode.title}</Text>
-                    </td>
-                    <td>
-                      <Text fontSize="xs">{episode.releaseDate}</Text>
-                    </td>
-                    <td>
-                      <Text fontSize="xs" align="right">
-                        {episode.duration}
-                      </Text>
-                    </td>
-                  </TableRow>
-                );
-              })}
-            </tbody>
-          </table>
-        </EpisodeTableWrapper>
+        <EpisodeTable episodes={podcastDetail.episodes} />
       </div>
     </PodcastDetailWrapper>
   );
@@ -90,34 +56,4 @@ const EpisodeCount = styled.div`
   margin-bottom: ${size.s};
   padding: ${size.xs};
   box-shadow: 0px 3px 10px -2px ${color.gray};
-`;
-
-const EpisodeTableWrapper = styled.div`
-  padding: ${size.m} ${size.s};
-  box-shadow: 0px 3px 10px -2px ${color.gray};
-
-  & > table {
-    width: 100%;
-    column-gap: ${size.m};
-  }
-`;
-
-const HeaderRow = styled.tr`
-  border-bottom: 2px solid ${color.lightGray};
-
-  & > * {
-    padding: ${size.xs} ${size.s};
-  }
-`;
-
-const TableRow = styled.tr`
-  border-bottom: 1px solid ${color.lightGray};
-
-  &:nth-of-type(odd) {
-    background-color: ${color.lighterGray};
-  }
-
-  & > * {
-    padding: ${size.xs} ${size.s};
-  }
 `;
