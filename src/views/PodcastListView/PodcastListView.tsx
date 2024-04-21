@@ -45,10 +45,7 @@ export const PodcastListView: React.FC = () => {
 
   const onPodcastClick = (podcastId: string) => {
     navigationContext.setIsNavigating(true);
-    const selectedPodcast = podcastList.find(
-      (podcast) => podcast.id === podcastId
-    );
-    navigate(routes.podcastDetail(podcastId), { state: { selectedPodcast } });
+    navigate(routes.podcastDetail(podcastId));
   };
 
   return (

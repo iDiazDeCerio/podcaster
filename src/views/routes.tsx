@@ -24,12 +24,10 @@ export const appRoutes: RouteObject[] = [
       {
         path: "/podcast/:podcastId",
         element: <PodcastDetail />,
-        children: [
-          {
-            path: "/podcast/:podcastId/episode/:episodeId",
-            element: <EpisodeDetail />,
-          },
-        ],
+      },
+      {
+        path: "/podcast/:podcastId/episode/:episodeId",
+        element: <EpisodeDetail />,
       },
     ],
   },

@@ -37,7 +37,7 @@ export const PodcastDetail: React.FC = () => {
 
   return (
     <PodcastDetailWrapper>
-      <PodcastDetailSummary />
+      <PodcastDetailSummary podcastId={podcastId} />
       <div>
         <EpisodeCount>
           <Text fontSize="l" bold>

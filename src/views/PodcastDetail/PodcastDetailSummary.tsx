@@ -1,14 +1,37 @@
-import React from 'react';
-import { useLocation } from 'react-router-dom';
-import styled from 'styled-components';
+import React, { useContext, useEffect, useState } from "react";
+import styled from "styled-components";
 
-import { PodcastListItem } from '../../api/podcast.models';
-import { Text } from '../_components/Text';
-import { color, size } from '../theme';
+import { Text } from "../_components/Text";
+import { color, size } from "../theme";
+import { getTop100Podcasts } from "../../api/repository";
+import { NavigationContext } from "../Root";
+import { PodcastListItem } from "../../api/podcast.models";
 
-export const PodcastDetailSummary: React.FC = () => {
-  const podcast: PodcastListItem = useLocation().state.selectedPodcast;
-  
+interface Props {
+  podcastId: string;
+}
+
+export const PodcastDetailSummary: React.FC<Props> = ({ podcastId }) => {
+  const navigationContext = useContext(NavigationContext);
+  const [podcast, setPodcast] = useState<PodcastListItem>();
+
+  useEffect(() => {
+    const loadPodcasts = async () => {
+      const topPodcasts = await getTop100Podcasts();
+      const currentPodcast = topPodcasts.find(
+        (podcast) => podcast.id === podcastId
+      );
+      setPodcast(currentPodcast);
+      navigationContext.setIsNavigating(false);
+    };
+
+    loadPodcasts();
+  }, [navigationContext, podcastId]);
+
+  if (!podcast) {
+    return <>Loading...</>
+  }
+
   return (
     <PodcastSummary>
       <PodcastImage src={podcast.image} />
