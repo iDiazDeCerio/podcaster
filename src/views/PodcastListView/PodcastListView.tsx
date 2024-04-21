@@ -8,6 +8,7 @@ import { routes } from "../routes";
 import { useNavigate } from "react-router-dom";
 import { NavigationContext } from "../Root";
 import { Loader } from "../_components/Loader";
+import { Text } from "../_components/Text";
 
 export const PodcastListView: React.FC = () => {
   const navigate = useNavigate();
@@ -48,6 +49,9 @@ export const PodcastListView: React.FC = () => {
     navigate(routes.podcastDetail(podcastId));
   };
 
+  if (initialPodcastList.length === 0) {
+    return <Loader fullPage />;
+  }
   return (
     <>
       <PodcastListFilter>
@@ -64,6 +68,7 @@ export const PodcastListView: React.FC = () => {
         />
       </PodcastListFilter>
       <PodcastListWrapper>
+        {podcastList.length === 0 && <Text>No results match the search</Text>}
         {podcastList.map((podcast) => (
           <ListPodcast
             key={podcast.id}

@@ -10,6 +10,7 @@ import { color, size } from "../theme";
 import { EpisodeTable } from "./EpisodeTable";
 import { PodcastDetailSummary } from "../_components/PodcastDetailSummary";
 import { routes } from "../routes";
+import { Loader } from "../_components/Loader";
 
 export const PodcastDetail: React.FC = () => {
   const navigationContext = useContext(NavigationContext);
@@ -32,7 +33,7 @@ export const PodcastDetail: React.FC = () => {
   };
 
   if (!podcastDetail) {
-    return <p>Loading...</p>;
+    return <Loader fullPage />;
   }
 
   return (

@@ -8,6 +8,7 @@ import { PodcastDetailSummary } from "./_components/PodcastDetailSummary";
 import styled from "styled-components";
 import { color, size } from "./theme";
 import { Text } from "./_components/Text";
+import { Loader } from "./_components/Loader";
 
 export const EpisodeDetail: React.FC = () => {
   const navigationContext = useContext(NavigationContext);
@@ -24,7 +25,7 @@ export const EpisodeDetail: React.FC = () => {
   }, [navigationContext, podcastId, episodeId]);
 
   if (!episode) {
-    return <p>Loading...</p>;
+    return <Loader fullPage />;
   }
 
   return (

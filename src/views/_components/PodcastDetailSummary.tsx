@@ -8,6 +8,7 @@ import { NavigationContext } from "../Root";
 import { PodcastListItem } from "../../api/podcast.models";
 import { routes } from "../routes";
 import { useNavigate } from "react-router-dom";
+import { Loader } from "./Loader";
 
 interface Props {
   podcastId: string;
@@ -43,7 +44,7 @@ export const PodcastDetailSummary: React.FC<Props> = ({
   };
 
   if (!podcast) {
-    return <>Loading...</>;
+    return <Loader fullPage />;
   }
 
   return (

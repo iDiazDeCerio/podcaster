@@ -1,12 +1,16 @@
 import React from "react";
-import styled, { keyframes } from "styled-components";
+import styled, { css, keyframes } from "styled-components";
 import { color, size } from "../theme";
 
-export const Loader: React.FC = () => (
+interface Props {
+  fullPage?: boolean;
+}
+
+export const Loader: React.FC<Props> = ({ fullPage }) => (
   <LoadIcon
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 100 100"
-    style={{ shapeRendering: "auto", display: "block" }}
+    fullPage={fullPage}
   >
     <circle
       cx="50"
@@ -25,12 +29,23 @@ const rotationAnimation = keyframes`
   100% { transform: rotate(360deg); }
 `;
 
-const LoadIcon = styled.svg`
+const LoadIcon = styled.svg<Props>`
   display: block;
   width: ${size.s};
   height: ${size.s};
 
   color: ${color.blue};
 
+  shape-rendering: auto;
   animation: ${rotationAnimation} 1.5s linear infinite;
+
+  ${(p) =>
+    p.fullPage &&
+    css`
+      width: ${size.l};
+      height: ${size.l};
+      margin-top: ${size.l};
+      margin-left: auto;
+      margin-right: auto;
+    `}
 `;
