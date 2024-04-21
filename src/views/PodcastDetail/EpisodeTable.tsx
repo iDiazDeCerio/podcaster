@@ -59,8 +59,6 @@ const EpisodeTableWrapper = styled.div`
   padding: ${size.m} ${size.s};
   box-shadow: 0px 3px 10px -2px ${color.gray};
 
-  border-bottom: 1px solid ${color.lightGray};
-
   & > table {
     width: 100%;
     column-gap: ${size.m};

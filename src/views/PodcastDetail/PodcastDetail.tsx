@@ -8,7 +8,7 @@ import { Text } from "../_components/Text";
 import { NavigationContext } from "../Root";
 import { color, size } from "../theme";
 import { EpisodeTable } from "./EpisodeTable";
-import { PodcastDetailSummary } from "./PodcastDetailSummary";
+import { PodcastDetailSummary } from "../_components/PodcastDetailSummary";
 import { routes } from "../routes";
 
 export const PodcastDetail: React.FC = () => {
@@ -26,7 +26,7 @@ export const PodcastDetail: React.FC = () => {
     loadPodcastDetail();
   }, [navigationContext, podcastId]);
 
-  const showEpisode = (episodeId: string) => {
+  const goToEpisode = (episodeId: string) => {
     navigationContext.setIsNavigating(true);
     navigate(routes.episodeDetail(podcastId, episodeId));
   };
@@ -46,7 +46,7 @@ export const PodcastDetail: React.FC = () => {
         </EpisodeCount>
         <EpisodeTable
           episodes={podcastDetail.episodes}
-          onEpisodeClick={showEpisode}
+          onEpisodeClick={goToEpisode}
         />
       </div>
     </PodcastDetailWrapper>
