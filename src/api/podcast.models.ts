@@ -11,7 +11,7 @@ interface PodcastEpisode {
   title: string;
   description: string;
   releaseDate: string;
-  duration: number;
+  duration: string;
   audioUrl: string;
 }
 

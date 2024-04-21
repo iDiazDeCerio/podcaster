@@ -20,6 +20,48 @@ export const mapTop100Podcasts = (
   });
 };
 
+const formatDuration = (duration: number) => {
+  const seconds = Math.floor(duration / 1000);
+  const minutes = Math.floor(seconds / 60);
+  const hours = Math.floor(minutes / 60);
+
+  let format = "";
+  if (hours > 0) {
+    format = format.concat(`${hours}:`);
+  }
+
+  if (minutes > 0) {
+    if (minutes % 60 < 10) {
+      format = format.concat(`0${minutes % 60}:`);
+    } else {
+      format = format.concat(`${minutes % 60}:`);
+    }
+  } else {
+    format = format.concat(`00:`);
+  }
+
+  if (seconds > 0) {
+    if (seconds % 60 < 10) {
+      format = format.concat(`0${seconds % 60}`);
+    } else {
+      format = format.concat(`${seconds % 60}`);
+    }
+  } else {
+    format = format.concat(`00`);
+  }
+
+  return format;
+};
+
+const formatDate = (dateString: string) => {
+  return new Date(dateString)
+    .toISOString()
+    .replace(/T.*/, "")
+    .split("-")
+    .reverse()
+    .join("/");
+};
+
 export const mapPodcastDetail = (
   podcastDetail: PodcastDetailDto
 ): PodcastDetailInfo => {
@@ -27,11 +69,11 @@ export const mapPodcastDetail = (
   return {
     episodeCount: summary.trackCount,
     episodes: podcastDetail.results.map((episode: PodcastEpisodeDto) => ({
-      id: `${episode.collectionId}`,
+      id: episode.episodeGuid,
       title: episode.trackName,
       description: episode.description,
-      releaseDate: episode.releaseDate,
-      duration: episode.trackTimeMillis,
+      releaseDate: formatDate(episode.releaseDate),
+      duration: formatDuration(episode.trackTimeMillis),
       audioUrl: episode.episodeUrl,
     })),
   };
