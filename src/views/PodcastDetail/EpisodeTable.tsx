@@ -7,9 +7,10 @@ import { PodcastDetailInfo } from "../../api/podcast.models";
 
 interface Props {
   episodes: PodcastDetailInfo["episodes"];
+  onEpisodeClick: (episodeId: string) => void;
 }
 
-export const EpisodeTable: React.FC<Props> = ({ episodes }) => {
+export const EpisodeTable: React.FC<Props> = ({ episodes, onEpisodeClick }) => {
   return (
     <EpisodeTableWrapper>
       <table>
@@ -32,7 +33,9 @@ export const EpisodeTable: React.FC<Props> = ({ episodes }) => {
               <TableRow key={episode.id}>
                 <td>
                   <Text fontSize="xs">
-                    <span>{episode.title}</span>
+                    <EpisodeLink onClick={() => onEpisodeClick(episode.id)}>
+                      {episode.title}
+                    </EpisodeLink>
                   </Text>
                 </td>
                 <td>
@@ -85,5 +88,14 @@ const TableRow = styled.tr`
 
   & > * {
     padding: ${size.xs} ${size.s};
+  }
+`;
+
+const EpisodeLink = styled.span`
+  color: ${color.blue};
+
+  &:hover {
+    color: ${color.darkBlue};
+    cursor: pointer;
   }
 `;

@@ -1,17 +1,19 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 
 import { PodcastDetailInfo } from "../../api/podcast.models";
 import { getPodcastDetailById } from "../../api/repository";
+import { Text } from "../_components/Text";
 import { NavigationContext } from "../Root";
 import { color, size } from "../theme";
-import { PodcastDetailSummary } from "./PodcastDetailSummary";
-import { Text } from "../_components/Text";
 import { EpisodeTable } from "./EpisodeTable";
+import { PodcastDetailSummary } from "./PodcastDetailSummary";
+import { routes } from "../routes";
 
 export const PodcastDetail: React.FC = () => {
   const navigationContext = useContext(NavigationContext);
+  const navigate = useNavigate();
   const { podcastId } = useParams();
   const [podcastDetail, setPodcastDetail] = useState<PodcastDetailInfo>();
 
@@ -23,6 +25,11 @@ export const PodcastDetail: React.FC = () => {
 
     loadPodcastDetail();
   }, [navigationContext, podcastId]);
+
+  const showEpisode = (episodeId: string) => {
+    navigationContext.setIsNavigating(true);
+    navigate(routes.episodeDetail(podcastId, episodeId));
+  };
 
   if (!podcastDetail) {
     return <p>Loading...</p>;
@@ -37,7 +44,10 @@ export const PodcastDetail: React.FC = () => {
             Episodes: {podcastDetail.episodeCount}
           </Text>
         </EpisodeCount>
-        <EpisodeTable episodes={podcastDetail.episodes} />
+        <EpisodeTable
+          episodes={podcastDetail.episodes}
+          onEpisodeClick={showEpisode}
+        />
       </div>
     </PodcastDetailWrapper>
   );

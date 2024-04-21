@@ -6,7 +6,7 @@ export interface PodcastListItem {
   description: string
 }
 
-interface PodcastEpisode {
+export interface PodcastEpisode {
   id: string;
   title: string;
   description: string;

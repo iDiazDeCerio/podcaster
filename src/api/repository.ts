@@ -1,4 +1,8 @@
-import { PodcastDetailInfo, PodcastListItem } from "./podcast.models";
+import {
+  PodcastDetailInfo,
+  PodcastEpisode,
+  PodcastListItem,
+} from "./podcast.models";
 import { storageHelper } from "./storageHelper";
 import { mapPodcastDetail, mapTop100Podcasts } from "./podcast.mappers";
 import { PodcastDetailDto, PodcastListDto } from "./podcast.dtos";
@@ -54,5 +58,39 @@ export const getPodcastDetailById = async (podcastId: string) => {
     return JSON.parse(
       storageHelper.load(podcastDetailStorageKey)
     ) as PodcastDetailInfo;
+  }
+};
+
+export const getEpisodeDetailById = async (
+  podcastId: string,
+  episodeId: string
+) => {
+  const episodeDetailStorageKey = `${podcastId}-${episodeId}-episodeDetail`;
+  if (storageHelper.isExpired(episodeDetailStorageKey)) {
+    const fetchedData: string = await fetch(
+      `https://api.allorigins.win/get?url=${encodeURIComponent(
+        `https://itunes.apple.com/lookup?id=${podcastId}&media=podcast &entity=podcastEpisode&limit=20`
+      )}`
+    )
+      .then((response) => {
+        if (response.ok) return response.json();
+        throw new Error("Network response was not ok.");
+      })
+      .then((data) => data.contents);
+
+    const mappedData = mapPodcastDetail(
+      JSON.parse(fetchedData) as PodcastDetailDto
+    );
+
+    const episode = mappedData.episodes.find(
+      (episode) => episode.id === episodeId
+    );
+
+    storageHelper.store(episodeDetailStorageKey, JSON.stringify(episode));
+    return episode;
+  } else {
+    return JSON.parse(
+      storageHelper.load(episodeDetailStorageKey)
+    ) as PodcastEpisode;
   }
 };
